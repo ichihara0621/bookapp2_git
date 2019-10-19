@@ -8,7 +8,7 @@
 
 Book.create!(title:  "Example User",
              author: "example@railstutorial.org",
-             publisher: "Example",
+             #publisher: "Example",
              genre: "Ex")
 
 39.times do |n|
@@ -18,6 +18,6 @@ Book.create!(title:  "Example User",
   genre = Faker::Book.genre
   Book.create!(title:  title,
                author: author,
-               publisher:   publisher,
+               #publisher:   publisher,
                genre: genre)
 end
