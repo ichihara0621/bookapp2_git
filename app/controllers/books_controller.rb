@@ -29,9 +29,7 @@ class BooksController < ApplicationController
   def show
     @books = Book.find(params[:id])
   end
-  def new
-    @books = Book.new
-  end
+  
   def index
     @books = Book.paginate(page: params[:page])
   end

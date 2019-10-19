@@ -1,0 +1,8 @@
+<li>
+  <%= gravatar_for books, size: 50 %>
+  <%= link_to books.title, books %>
+  
+    | <%= link_to "delete", books, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  
+</li>
