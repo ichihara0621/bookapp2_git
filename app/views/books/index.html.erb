@@ -1,11 +1,15 @@
 <% provide(:title, 'All books') %>
 <h1>All books</h1>
 
+<%= will_paginate %>
+
 <ul class="books">
   <% @books.each do |book| %>
     <li>
-      <%= gravatar_for book, size: 50 %>
-      <%= link_to book.name, book %>
+      
+      <%= link_to book.title, book %>
     </li>
   <% end %>
 </ul>
+
+<%= will_paginate %>
