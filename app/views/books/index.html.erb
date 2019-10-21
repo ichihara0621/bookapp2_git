@@ -4,14 +4,18 @@
 <%= will_paginate %>
 
 <ul class="books">
+    <br>
+  <%= link_to "Insert", create_path, class: "btn btn-lg btn-primary" %>
   <% @books.each do |book| %>
     <li>
-      
+
       <%= link_to book.title, book %>
       <br>
       <%= link_to "delete", book, method: :delete %>
+
     </li>
   <% end %>
+
 </ul>
 
 <%= will_paginate %>

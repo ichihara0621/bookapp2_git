@@ -1,33 +1,10 @@
-#class BooksController < ApplicationController
-#  before_action :logged_in_user, only: [:index, :edit, :update]
-#  before_action :correct_user,   only: [:edit, :update]
-#
-#  def show
-#  end
-#
-#  def create
-#  end
-#
-#  def edit
-#  end
-#
-#  def destroy
-#    Book.find(params[:id]).destroy
-#    flash[:success] = "Book deleted"
-#    redirect_to users_url
-#  end
-#
-#  def update
-#  end
-#
-#  def index
-#    @book = Book.all
-#  end
-#end
-
 class BooksController < ApplicationController
   def show
     @books = Book.find(params[:id])
+  end
+
+  def new
+    @books = Book.new
   end
   
   def index
@@ -39,10 +16,10 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
-    if @book.update_attributes(book_params)
+    @books = Book.find(params[:id])
+    if   @books.update_attributes(book_params)
       flash[:success] = "Book updated"
-      redirect_to @book
+      redirect_to @books
     else
       render 'edit'
     end
@@ -54,7 +31,19 @@ class BooksController < ApplicationController
     redirect_to books_url
   end
 
-private
+  def create
+    @books = Book.new(params[:book])
+    #if 
+      @books.save
+      log_in@books
+      flash[:success] = "Book Insert!"
+      redirect_to @books
+    #else
+    #  render 'new'
+    #end
+  end
+
+ private
 
   def book_params
      params.require(:book).permit(:title, :author, :genre)
