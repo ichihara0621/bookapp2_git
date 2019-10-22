@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   get    '/about',   to: 'static_pages#about'
   get    '/contact', to: 'static_pages#contact'
   get    '/signup',  to: 'users#new'
+  resources :users
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get    '/books',   to: 'books#index'
-  get    '/create',   to: 'books#new'
-  post   '/create',   to: 'books#create'
-
-  resources :users
+  #get    '/create',   to: 'books#new'
+  #post   '/create',   to: 'books#create'
+  #get    '/searchtab'  to: 'books#searchtab'
+  #resources :users
   resources :books
  
 end

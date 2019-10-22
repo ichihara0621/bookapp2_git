@@ -8,7 +8,13 @@ class BooksController < ApplicationController
   end
   
   def index
-    @books = Book.paginate(page: params[:page])
+  @books = if params[:search]
+      #searchされた場合は、原文+.where('name LIKE ?', "%#{params[:search]}%")を実行
+      Book.paginate(page: params[:page]).where('title LIKE ?', "%#{params[:search]}%")
+    else
+      #searchされていない場合は、原文そのまま
+      Book.paginate(page: params[:page])
+    end
   end
 
   def edit
@@ -32,15 +38,15 @@ class BooksController < ApplicationController
   end
 
   def create
-    @books = Book.new(params[:book])
-    #if 
+    @books = Book.new(book_params)
+    if 
       @books.save
       log_in@books
       flash[:success] = "Book Insert!"
       redirect_to @books
-    #else
-    #  render 'new'
-    #end
+    else
+      render 'new'
+    end
   end
 
  private
@@ -48,5 +54,4 @@ class BooksController < ApplicationController
   def book_params
      params.require(:book).permit(:title, :author, :genre)
   end
-
 end

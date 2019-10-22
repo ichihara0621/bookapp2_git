@@ -4,8 +4,15 @@
 <%= will_paginate %>
 
 <ul class="books">
-    <br>
-  <%= link_to "Insert", create_path, class: "btn btn-lg btn-primary" %>
+<br>
+  <p>book search</p>
+  <%= form_tag(books_path, :method => 'get' ) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', :title => nil %>
+  <% end %>
+
+<br>
+  <%= link_to "Insert", new_book_path, class: "btn btn-lg btn-primary" %>
   <% @books.each do |book| %>
     <li>
 
