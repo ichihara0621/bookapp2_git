@@ -19,22 +19,30 @@ RSpec.describe User, type: :model do
     )
     expect(user).to be_valid
   end
-end
 
-#
-#  # パスワード確認が一致すること
-#  describe "when password doesn't match confirmation" do
-#    # 一致する場合
-#    it "is valid when password confirmation matches password" do
-#      user = FactoryBot.build(:user, password: "password", password_confirmation: "password")
-#      expect(user).to be_valid
-#    end
-#
-#    # 一致しない場合
-#    it "is invalid when password confirmation doesn't match password" do
-#      user = FactoryBot.build(:user, password: "password", password_confirmation: "different")
-#      user.valid?
-#      expect(user.errors[:password_confirmation]).to include("doesn't match Password")
-#    end
-#  end
-#end
+  describe '#name' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:email) }
+
+    it { should validate_presence_of(:password) }
+    it { should validate_length_of(:password).is_at_least(6)}
+  end
+
+
+
+  # パスワード確認が一致すること
+  describe "when password doesn't match confirmation" do
+    # 一致する場合
+    it "is valid when password confirmation matches password" do
+      user = FactoryBot.build(:user, password: "password", password_confirmation: "password")
+      expect(user).to be_valid
+    end
+
+    # 一致しない場合
+    it "is invalid when password confirmation doesn't match password" do
+      user = FactoryBot.build(:user, password: "password", password_confirmation: "different")
+      user.valid?
+      expect(user.errors[:password_confirmation]).to include("doesn't match Password")
+    end
+  end
+end
