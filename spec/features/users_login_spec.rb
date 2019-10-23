@@ -33,4 +33,33 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_content("can't be blank")
 
   end
+
+  
+ #loginエラーメッセージ
+ #ユーザー名とパスワードが違う
+  scenario "ユーザー名とパスワードが違う場合のエラー" do
+      visit login_path
+  
+      fill_in "Email", with: "ichihara.misato@lmi.ne.jp "
+      fill_in "Password", with: "aiueokaki"
+      click_button "Log in"
+  
+      expect(page).to have_content("Invalid email/password combination")
+  
+  end
+ #ユーザーがいない
+ scenario "登録されていないユーザーのエラー" do
+      visit login_path
+  
+      fill_in "Email", with: "ichihara@lmi.ne.jp "
+      fill_in "Password", with: "aiueoooooooo"
+      click_button "Log in"
+  
+      expect(page).to have_content("Invalid email/password combination")
+  
+  end
+
+
+
+
 end

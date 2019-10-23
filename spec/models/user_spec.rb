@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it "メールアドレスが無効の場合" do
+  it "メールアドレスが無効(@なし)の場合" do
     user = User.new(
       name: "ichihara misato",
       email: 'ichihara.misatolmi.ne.jp',
@@ -10,6 +10,17 @@ RSpec.describe User, type: :model do
     )
     expect(user).to be_invalid
   end
+
+  it "メールアドレスが無効(.なし)の場合" do
+    user = User.new(
+      name: "ichihara misato",
+      email: 'ichihara.misato@lminejp',
+      password: 'ichiharamisato'
+      #password_confirmation: 'ichiharamisato'
+    )
+    expect(user).to be_invalid
+  end
+
   it "メールアドレスが有効な場合" do
     user = User.new(
       name: "ichihara misato",
@@ -26,6 +37,8 @@ RSpec.describe User, type: :model do
 
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6)}
+    it { should validate_length_of(:password).is_at_most(72)}
+
   end
 
 
@@ -45,4 +58,12 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password_confirmation]).to include("doesn't match Password")
     end
   end
+
+ ##パスワードのバリデーション
+ #it "パスワードの文字数" do
+ #   
+ #     it { should validate_length_of(:password).is_at_maximum(256)}
+ #   
+ #   expect(user).to be_invalid
+ # end
 end
