@@ -21,6 +21,7 @@ class BooksController < ApplicationController
 
   def edit
     @books  = Book.find(params[:id])
+    
   end
 
   def update
@@ -41,9 +42,7 @@ class BooksController < ApplicationController
 
   def create
     @books = Book.new(book_params)
-    if 
-      @books.save
-      log_in@books
+    if @books.save
       flash[:success] = "Book Insert!"
       redirect_to @books
     else
