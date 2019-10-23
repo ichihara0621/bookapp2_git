@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
+
+ 
+
   scenario "Signupページにページ遷移できるか" do
     visit root_path
     click_on "Sign up"
@@ -36,6 +39,19 @@ RSpec.feature "Users", type: :feature do
 
   
  #loginエラーメッセージ
+
+  scenario "正しいemailとパスワードでログイン成功" do
+    @user = FactoryBot.create(:user)
+    visit login_path
+  
+      fill_in "Email", with: "tester1@example.com"
+      fill_in "Password", with: "password"
+      click_button "Log in"
+  
+      expect(current_path).to eq user_path(@user.id)
+  
+  end
+
  #ユーザー名とパスワードが違う
   scenario "ユーザー名とパスワードが違う場合のエラー" do
       visit login_path

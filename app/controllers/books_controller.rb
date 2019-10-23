@@ -10,9 +10,10 @@ class BooksController < ApplicationController
   end
   
   def index
-  @books = if params[:search]
+   @books = if params[:search]
       #searchされた場合は、原文+.where('name LIKE ?', "%#{params[:search]}%")を実行
-      Book.paginate(page: params[:page]).where('title LIKE ?', "%#{params[:search]}%")
+     Book.paginate(page: params[:page]).where('title LIKE ?', "%#{params[:search]}%")
+       
     else
       #searchされていない場合は、原文そのまま
       Book.paginate(page: params[:page])

@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :book do
-    title { "MyString" }
+    sequence(:title) { |n| "Mytitle#{n}" }
     author { "MyString" }
-    publesher { "MyString" }
+    #publesher { "MyString" }
     genre { "MyString" }
   end
 end

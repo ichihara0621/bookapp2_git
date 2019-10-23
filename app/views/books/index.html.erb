@@ -8,21 +8,28 @@
   <p>book search</p>
   <%= form_tag(books_path, :method => 'get' ) do %>
   <%= label_tag :search%>
-  <%= text_field_tag :search %>
+  <%= text_field_tag :search, nil, id: "title" %>
    <%= submit_tag 'Search', :title => nil %>
+   
   <% end %>
-
 
 <br>
   <%= link_to "Insert", new_book_path, class: "btn btn-lg btn-primary" %>
-  <% @books.each do |book| %>
-    <li>
+  
+
+    <% if @books.length == 0 %>
+    <h2>Not Found</h2>
+    <% else %>
+     <% @books.each do |book| %>
+  
+    <li class ="titles">
 
       <%= link_to book.title, book %>
       <br>
       <%= link_to "delete", book, method: :delete %>
 
     </li>
+  <% end %>
   <% end %>
 
 </ul>
